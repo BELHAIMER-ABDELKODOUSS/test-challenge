@@ -6,6 +6,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify the Node.js version you need
+
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Start the Snowpack server
+        run: npx snowpack dev &
+        env:
+          NODE_ENV: test
+        # Allow some time for the server to start
+        timeout-minutes: 1
+
+      - name: Wait for the Snowpack server to be ready
+        run: npx wait-on http://localhost:8080 # Replace with the actual URL and port of your Snowpack server
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
