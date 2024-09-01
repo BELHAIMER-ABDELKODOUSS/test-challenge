@@ -174,7 +174,7 @@ describe('Page Load and Component Rendering Test', () => {
       .should('be.visible')
       .and('contain', 'Your information has been successfully submitted');
   });
-  
+
   it('TC-05: Fill with invalid data and Upload Valid Size & Format File', () => {
     cy.visit('http://localhost:8080/');
     cy.get('[data-testid="title"]') // Replace with the selector of your input
@@ -254,5 +254,4 @@ describe('Page Load and Component Rendering Test', () => {
       .should('be.visible')
       .and('contain', 'Network error occurred. Please try again later.');
   });
- 
 });
