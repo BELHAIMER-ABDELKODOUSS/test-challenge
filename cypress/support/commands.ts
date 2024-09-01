@@ -24,7 +24,7 @@ const valid_data = {
 };
 Cypress.Commands.add('fill_form', () => {
   cy.get('[data-testid="title"]') // Replace with the selector of your input
-    .type(valid_data['file']);
+    .type(valid_data['title']);
   cy.get('[data-testid="description"]') // Replace with the selector of your input
     .type(valid_data['description']);
   cy.get('[data-testid="document-category"]').select(
