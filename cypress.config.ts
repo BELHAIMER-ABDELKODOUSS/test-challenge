@@ -5,6 +5,8 @@ export default defineConfig({
   video: true,
 
   e2e: {
+    supportFile: 'cypress/e2e/cypress/support/e2e.ts',
+
     setupNodeEvents(on, config) {
       // implement node event listeners here
       require('cypress-mochawesome-reporter/plugin')(on);

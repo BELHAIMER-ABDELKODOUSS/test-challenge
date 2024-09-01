@@ -10,6 +10,12 @@
 // ***********************************************
 //
 //
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    myCommand(): Chainable<any>;
+  }
+}
+
 //-- This is a parent command --
 Cypress.Commands.add('upload', () => {
   const fileName = 'sample.pdf';

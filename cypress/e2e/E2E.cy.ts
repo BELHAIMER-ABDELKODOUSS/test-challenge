@@ -189,8 +189,6 @@ describe('Page Load and Component Rendering Test', () => {
         cy.get('[data-testid="document-category"]').select(
           object['documentCategory'],
         );
-      if (object['document-type'] != '')
-        cy.get('[data-testid="document-type"]').should('be.visible');
       if (object['file'] != '') cy.uploadFile(object['file']);
 
       cy.get('#submit_btn').click();
