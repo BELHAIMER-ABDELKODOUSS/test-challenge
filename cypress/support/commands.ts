@@ -15,6 +15,23 @@ declare namespace Cypress {
     myCommand(): Chainable<any>;
   }
 }
+const valid_data = {
+  title: 'Procurement Plan',
+  description:
+    'A document outlining project requirements, inviting suppliers to submit a comprehensive proposal',
+  documentCategory: 'sales proposal',
+  file: 'sample.pdf',
+};
+Cypress.Commands.add('fill_form', () => {
+  cy.get('[data-testid="title"]') // Replace with the selector of your input
+    .type(valid_data['file']);
+  cy.get('[data-testid="description"]') // Replace with the selector of your input
+    .type(valid_data['description']);
+  cy.get('[data-testid="document-category"]').select(
+    valid_data['documentCategory'],
+  );
+  cy.get('[data-testid="document-type"]').should('be.visible');
+});
 
 //-- This is a parent command --
 Cypress.Commands.add('upload', () => {

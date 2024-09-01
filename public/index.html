@@ -113,7 +113,7 @@
           '[data-testid="document-file"]',
         );
 
-        if (
+        if (!isNaN(parseFloat(title.value))||
           title.value == '' ||
           description.value == '' ||
           documentCategory.value == '' ||
