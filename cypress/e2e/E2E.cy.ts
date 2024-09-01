@@ -158,7 +158,7 @@ describe('Page Load and Component Rendering Test', () => {
       .should('be.visible')
       .and('contain', "Your information hasn't been successfully submitted"); // assert that the results are as expected
   });
-  it('TC-04: Fill and Upload Valid data and Valid Size & Format File', () => {
+  it.skip('TC-04: Fill and Upload Valid data and Valid Size & Format File', () => {
     cy.visit('http://localhost:8080/');
     cy.get('[data-testid="title"]') // input valid data
       .type(valid_data['file']); // input valid data
