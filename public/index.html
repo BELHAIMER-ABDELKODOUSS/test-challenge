@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Challenge</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+  </head>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="container" style="margin-top: 5rem">
+      <h1>Test Challenge</h1>
+      <form action="" id="myForm">
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          aria-label="title"
+          data-testid="title"
+        />
+        <textarea
+          name="description"
+          placeholder="Write a professional short description"
+          aria-label="Professional short description"
+          data-testid="description"
+        ></textarea>
+        <select
+          name="document"
+          aria-label="document-category"
+          required
+          data-testid="document-category"
+          id="document-category"
+        >
+          <option selected disabled value="">
+            Select your document category
+          </option>
+          <option value="sales proposal">sales proposal</option>
+          <option value="purchase order">purchase order</option>
+        </select>
+
+        <fieldset class="hidden" id="document_type" data-testid="document-type">
+          <legend>Type Of Document</legend>
+          <label>
+            <input type="radio" name="document_type" checked />
+            Buyer
+          </label>
+          <label>
+            <input type="radio" name="document_type" />
+            Seller
+          </label>
+        </fieldset>
+        <input type="file" data-testid="document-file" accept=".pdf,.docx" />
+        <input type="submit" id="submit_btn" />
+      </form>
+      <dialog id="dialog" close>
+        <article>
+          <header>
+            <!-- <button aria-label="Close" rel="prev"></button> -->
+            <p>
+              <strong>Thank You for Registering!</strong>
+            </p>
+          </header>
+          <p id="m_text">Your Information Has Been Submitted</p>
+
+          <form method="dialog">
+            <button type="submit">Close</button>
+          </form>
+        </article>
+      </dialog>
+    </div>
+    <p id="dialogStatus"></p>
+    <script>
+      const documentCategory = document.querySelector('#document-category');
+      const form = document.getElementById('myForm');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+      });
+
+      documentCategory.addEventListener('change', function () {
+        const selectedValue = this.value;
+
+        if (selectedValue) {
+          document.getElementById('document_type').classList.remove('hidden');
+        } else {
+          document.getElementById('document_type').classList.add('hidden');
+        }
+      });
+
+      const openDialog = document.getElementById('submit_btn');
+      const text = document.getElementById('dialogStatus');
+      const dialogp = document.querySelector('#dialog article #m_text');
+
+      openDialog.addEventListener('click', () => {
+        const dialog = document.getElementById('dialog');
+
+        let isValid = true;
+        const title = document.querySelector('[data-testid="title"]');
+        const description = document.querySelector(
+          '[data-testid="description"]',
+        );
+        const documentCategory = document.querySelector(
+          '[data-testid="document-category"]',
+        );
+        const documentFile = document.querySelector(
+          '[data-testid="document-file"]',
+        );
+
+        if (
+          title.value == '' ||
+          description.value == '' ||
+          documentCategory.value == '' ||
+          documentFile.value == ''
+        ) {
+          isValid = false;
+        }
+
+        if (isValid == false) {
+         
+          dialogp.style = 'color:red;';
+          dialogp.textContent =
+            "Your information hasn't been successfully submitted";
+        } else {
+          dialogp.style = 'color:green;';
+          dialogp.textContent =
+            'Your information has been successfully submitted';
+        }
+        dialog.showModal();
+      });
+    </script>
+  </body>
+</html>
